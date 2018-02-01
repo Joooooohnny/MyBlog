@@ -1,6 +1,33 @@
+
 <!DOCTYPE html>
 <html>
-<title>hey</title>
-hello word
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.js"></script>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  
+  
+</head>
+<body>
+  <div id="content">
+# my first blog
+    
+## talk sense to a fool and he calls you foolish.
 
+[百度](http://baidu.com)
+`
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1517473740061&di=d8c55b5ffa5c3bcf446fe8ac15aea1a6&imgtype=0&src=http%3A%2F%2Fcms-bucket.nosdn.127.net%2Fcatchpic%2F9%2F9f%2F9f0b9d290d711dab76ddbab866432b4c.jpg%3FimageView%26thumbnail%3D550x0">
+  </div>
+      
+      
+     <script> 
+       var content=document.getElementById('content')
+       var markdown=content.innerHTML
+       var html=marked(markdown)     
+       content.innerHTML =html
+    </script>
+  
+  
+</body>
 </html>
