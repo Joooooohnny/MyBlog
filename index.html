@@ -1,40 +1,101 @@
-
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>JS Bin</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.12/marked.js"></script>
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  
-  <style>
-    img{
-      max-width:100%;
-    }
-    
-  </style>
-</head>
-<body>
-  <div id="content">
-# my first blog
-    
-## talk sense to a fool and he calls you foolish.
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        
+        <title>DIDI test</title> 
+        <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+        <script src="index.js"></script>
+        <script src="http://api.map.baidu.com/api?v=2.0&ak=qntV4LT7YvgAQ52vL3qld9EVpISmUCTM"></script>
+        
+    </head>
+    <body>    
+        <div class="container">
+            <div class="bar">                   
+                <div class="userinfo">
+                    <i class="fa fa-user-circle-o" style="font-size:36px"></i>
+                </div>
+                <div class="select_location">
+                    <p>泉州市</p>
+                </div>
+                <ul id="btn_extensions">
+                    <li><i class="fa fa-commenting" style="font-size:30px"></i></li>
+                    <li><i class="fa fa-minus-square-o" style="font-size:30px"></i></li>
+                </ul>
+                <ul id="btn_cars">
+                    <li>快车</li>
+                    <li>礼程专车</li>
+                    <li>出租车</li>
+                    <li>顺风车</li>
+                    <li>单车</li>
+                    <li><i class="fa fa-navicon" style="font-size:29px"></i></li>
+                </ul>
+            </div>
+            <div class="wrapForDetail">
+                <div id="btn_close">
+                    <i class="fa fa-times-circle" style="font-size:30px"></i>
+                </div>
 
-##[how to become a kick-ass web developer](https://zhuanlan.zhihu.com/p/22978846)
-##[examples of use flexbox layout](http://zh.learnlayout.com/flexbox.html)    
-##[take a look](https://joooooohnny.github.io/MyBlog/Focus%20To-Do/Index.html)
-`
-    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1517473740061&di=d8c55b5ffa5c3bcf446fe8ac15aea1a6&imgtype=0&src=http%3A%2F%2Fcms-bucket.nosdn.127.net%2Fcatchpic%2F9%2F9f%2F9f0b9d290d711dab76ddbab866432b4c.jpg%3FimageView%26thumbnail%3D550x0">
-  </div>
-      
-      
-     <script> 
-       var content=document.getElementById('content')
-       var markdown=content.innerHTML
-       var html=marked(markdown)     
-       content.innerHTML =html
-    </script>
-  
-  
-</body>
+                <div id="usr_portrait"><img src="./2.jpg"></div>
+                <div id="usr_name">林俊豪</div>
+                <div class="wrapForinfo">
+                    <ul id="icon">
+                        <li><i class="fa fa-credit-card" style="font-size:24px"></i></li>
+                        <li><i class="fa fa-cc-visa" style="font-size:24px"></i></li>
+                        <li><i class="fa fa-assistive-listening-systems" style="font-size:24px"></i></li>
+                        <li><i class="fa fa-gear" style="font-size:24px"></i></li>
+                        <li><i class="fa fa-birthday-cake" style="font-size:24px"></i></li>
+                    </ul>
+                    <ul id="btn_group">
+                        <li>订单</li>
+                        <li>钱包</li>
+                        <li>客服</li>
+                        <li>设置</li>
+                        <li>优惠</li>
+                    </ul>
+
+                </div>
+                </div>
+                
+            </div>
+            <div class="map-show" id="allmap"></div>
+            <div class="wrapBottom">
+                <button class="btn_group" id="DrivingAgentforDaily">日常代驾</button>
+                <button class="btn_group" id="DrivingAgentforTime">包时代驾</button>
+                <button class="btn_group" id="OwnerService">车主服务</button>
+
+                <div class="ball ball1"></div>
+                <input type="text" id="CurrentLocation" placeholder="在哪里上车">
+                <div class="line"></div>
+                <div class="ball ball2"></div>
+                <input type="text" id="destination" placeholder="您要去哪儿">
+            </div>
+        </div>
+
+        <script> 
+                $(document).ready(function(){
+                  $(".userinfo").click(function(){
+                    $(".map-show").css({ 'z-index': -1});
+                    $(".wrapBottom").css({ 'z-index': -1});
+                    $(".wrapForDetail").animate({left:'0px'});
+    
+                    $(".userinfo").css({ opacity: 0 });
+                  });
+                    
+                  $("#btn_close").click(function(){
+                    $(".wrapForDetail").animate({"left":"-70%"});
+                    setTimeout(function(){$(".userinfo").css({ opacity: 1 });},300);
+                    $(".map-show").css({ 'z-index': 1});
+                    $(".wrapBottom").css({ 'z-index': 1});
+                  });
+                });
+                var map = new BMap.Map("allmap");    // 创建Map实例
+	            map.centerAndZoom(new BMap.Point(120.19, 30.26), 11);  // 初始化地图,设置中心点坐标和地图级别
+	            map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+	            map.setCurrentCity("泉州");          // 设置地图显示的城市 此项是必须设置的
+	            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放 
+        </script> 
+    </body>
 </html>
